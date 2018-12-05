@@ -16,7 +16,7 @@ var markers = [];
 var placeMarkers = [];
 var largeInfowindow;
 
-function initMap() {
+function mapInit() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 19.702721, lng: -101.194019},
@@ -128,8 +128,23 @@ function ViewModel() {
     }
     this.placestr = ko.observable();
 
-    var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + loc.title + '&format=json&callback=wikiCallback';
+    var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + placestr() + '&format=json&callback=wikiCallback';
+    $.ajax({
+        url: wikiUrl,
+        dataType: "jsonp",
+        jsonp: "callback",
+        success: function( response ) {
+            var articleList = response[1];
 
+            for (var i = 0; i < articleList.length; i++) {
+                articleStr = articleList[i];
+                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+            };
+
+            clearTimeout(wikiRequestTimeout);
+        }
+    });
 
 
     this.filteredLocations = ko.computed(function() {
