@@ -120,10 +120,30 @@ function ViewModel() {
    self= this;
    //Updates and stores the search
     this.search = ko.observable("");
+    //Stores markers in an observable array
     this.loc=ko.observableArray();
+    //copy the locations array into an observable array
     for (var i = 0; i <markers.lenght; i++){
         self.loc.push(markers[i])
     }
-    var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + locations.title + '&format=json&callback=wikiCallback';
+    this.placestr = ko.observable();
 
+    var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + loc.title + '&format=json&callback=wikiCallback';
+
+
+
+    this.filteredLocations = ko.computed(function() {
+        var filter = self.search().toLowerCase();
+        if (!filter) {
+            self.loc().forEach(function(item){
+                item.setVisible(true);
+            });
+            return self.myLocations();
+        } else {
+            return ko.utils.arrayFilter(self.myLocations(), function(item) {
+                var match = item.name.toLowerCase().indexOf(filter) >= 0
+                item.setVisible(match);
+                return match;
+            })
+        }}, self);
 }
