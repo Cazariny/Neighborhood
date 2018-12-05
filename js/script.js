@@ -115,3 +115,15 @@ function populateInfoWindow(marker, infowindow) {
         infowindow.open(map, marker);
     }
 }
+
+function ViewModel() {
+   self= this;
+   //Updates and stores the search
+    this.search = ko.observable("");
+    this.loc=ko.observableArray();
+    for (var i = 0; i <markers.lenght; i++){
+        self.loc.push(markers[i])
+    }
+    var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + locations.title + '&format=json&callback=wikiCallback';
+
+}

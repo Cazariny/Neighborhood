@@ -14,7 +14,7 @@
         <h2>Morelia</h2>
         <div>
             <form>
-                <input data-bind="textInput: userInput" id="search-box" placeholder="Search">
+                <input data-bind="textInput: search" id="search-box" placeholder="Search">
             </form>
         </div>
         <div class="toggle-btn" onclick="toggleSidebar()">
@@ -22,7 +22,7 @@
         </div>
         <div>
             <ul data-bind="foreach: filteredLocations">
-                <li data-bind="text: name, click: $parent.listViewClick""></li>
+                <li data-bind="text: name, click: $parent.listViewClick"></li>
             </ul>
         </div>
         <div class="links">
