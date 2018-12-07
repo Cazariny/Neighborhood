@@ -11,9 +11,6 @@ var map;
 // Create a new blank array for all the listing markers.
 var markers = [];
 
-// Create placemarkers array to use in multiple functions to have control
-// over the number of places that show.
-var placeMarkers = [];
 var largeInfowindow;
 
 function mapInit() {
@@ -116,6 +113,14 @@ function populateInfoWindow(marker, infowindow) {
     }
 }
 
+var Location = function(data) {
+    this.name =  data.name;
+    this.location = data.location;
+    this.marker = data.marker;
+}
+function error() {
+    alert("Google Maps has failed to load. Please try again.");
+}
 function ViewModel() {
    self= this;
    //Updates and stores the search
@@ -146,6 +151,9 @@ function ViewModel() {
         }
     });
 
+    this.listViewClick = function(marker) {
+        google.maps.event.trigger(marker, 'click');
+    }
 
     this.filteredLocations = ko.computed(function() {
         var filter = self.search().toLowerCase();
@@ -161,4 +169,7 @@ function ViewModel() {
                 return match;
             })
         }}, self);
+}
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle('active');
 }

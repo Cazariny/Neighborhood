@@ -7,13 +7,9 @@
 
     </head>
     <body>
-    <nav class="navbar">
-        <div>
-            <h3>Historical places in Morelia</h3>
-        </div>
-    </nav>
+    <div id="map"></div>
     <div id="sidebar">
-        <h2>Morelia</h2>
+        <h2>History in Morelia</h2>
         <div>
             <form>
                 <input data-bind="textInput: search" id="search-box" placeholder="Search">
@@ -30,10 +26,10 @@
         <div class="links">
         </div>
     </div>
-
+    <script src="js/script.js"> </script>
         <script async defer
                 src=
-                        "https://maps.googleapis.com/maps/api/js?&key=AIzaSyDU6vmO1vxcxYRjRSWY-UVnhS-4eGU4tpk&v=3&callback=mapInit">
+                        "https://maps.googleapis.com/maps/api/js?&key=AIzaSyDU6vmO1vxcxYRjRSWY-UVnhS-4eGU4tpk&v=3&callback=mapInit" onerror="error()">
         </script>
     <script src="js/lib/jquery-3.3.1.min.js"> </script>
     <script src="js/lib/knockout-3.4.2.js"></script>
