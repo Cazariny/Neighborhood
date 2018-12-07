@@ -17,8 +17,7 @@ function mapInit() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 19.702721, lng: -101.194019},
-        zoom: 17,
-        mapTypeControl: false
+        zoom: 17
     });
 
     largeInfowindow = new google.maps.InfoWindow();
@@ -39,6 +38,7 @@ function mapInit() {
         var title = locations[i].title;
         // Create a marker per location, and put into markers array.
         var marker = new google.maps.Marker({
+            map: map,
             position: position,
             title: title,
             animation: google.maps.Animation.DROP,
