@@ -122,13 +122,13 @@ function error() {
     alert("Google Maps has failed to load. Please try again.");
 }
 function ViewModel() {
-   self= this;
-   //Updates and stores the search
+    self = this;
+    //Updates and stores the search
     this.search = ko.observable("");
     //Stores markers in an observable array
-    this.loc=ko.observableArray();
+    this.loc = ko.observableArray();
     //copy the locations array into an observable array
-    for (var i = 0; i <markers.lenght; i++){
+    for (var i = 0; i < markers.lenght; i++) {
         self.loc.push(markers[i])
     }
     this.placestr = ko.observable();
@@ -138,38 +138,21 @@ function ViewModel() {
         url: wikiUrl,
         dataType: "jsonp",
         jsonp: "callback",
-        success: function( response ) {
+        success: function (response) {
             var articleList = response[1];
 
             for (var i = 0; i < articleList.length; i++) {
                 articleStr = articleList[i];
                 var url = 'http://en.wikipedia.org/wiki/' + articleStr;
                 $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
-            };
+            }
+            ;
 
             clearTimeout(wikiRequestTimeout);
         }
     });
-
-    this.listViewClick = function(marker) {
-        google.maps.event.trigger(marker, 'click');
-    }
-
-    this.filteredLocations = ko.computed(function() {
-        var filter = self.search().toLowerCase();
-        if (!filter) {
-            self.loc().forEach(function(item){
-                item.setVisible(true);
-            });
-            return self.myLocations();
-        } else {
-            return ko.utils.arrayFilter(self.myLocations(), function(item) {
-                var match = item.name.toLowerCase().indexOf(filter) >= 0
-                item.setVisible(match);
-                return match;
-            })
-        }}, self);
 }
+
 function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle('active');
 }
