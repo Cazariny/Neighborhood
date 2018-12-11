@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a0b5bc3a-6a6a-42c6-a960-4a4b17707564" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/navbar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/script.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,13 +13,43 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1907618098">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-1942241704">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.19" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="js" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JavaScript" value="3" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+            <state relative-caret-position="621">
+              <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -31,8 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="126" column="34" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
+            <state relative-caret-position="207">
+              <caret line="90" column="76" lean-forward="true" selection-start-line="90" selection-start-column="76" selection-end-line="90" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -86,10 +112,16 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="957" />
-    <option name="height" value="1047" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -104,6 +136,16 @@
             <path>
               <item name="Neighborhood" type="b2602c69:ProjectViewProjectNode" />
               <item name="Neighborhood" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Neighborhood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Neighborhood" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Neighborhood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Neighborhood" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -169,6 +211,9 @@
       <workItem from="1543974867188" duration="2908000" />
       <workItem from="1544040671866" duration="4035000" />
       <workItem from="1544146411562" duration="3707000" />
+      <workItem from="1544241574121" duration="354000" />
+      <workItem from="1544242042145" duration="2235000" />
+      <workItem from="1544507827169" duration="619000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1543897928566</created>
@@ -205,17 +250,24 @@
       <option name="project" value="LOCAL" />
       <updated>1544045744140</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="View model construction">
+      <created>1544243249475</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1544243249475</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44605000" />
+    <option name="totallyTimeSpent" value="47804000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12012645" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1688988" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -238,6 +290,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="mayor changes" />
@@ -245,54 +300,31 @@
     <option name="LAST_COMMIT_MESSAGE" value="View model construction" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../ud989-todo-app/js/models/todo.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../ud989-todo-app/js/models/todo.js" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa17340.40280/navbar.css" />
-    <entry file="file://$PROJECT_DIR$/../ud864/Project_Code_2_MakingYourMark.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/bootstrap-4.1.3/bootstrap-4.1.3/site/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../ud864/Project_Code_2_MakingYourMark.html" />
+    <entry file="file://$USER_HOME$/Desktop/bootstrap-4.1.3/bootstrap-4.1.3/site/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css" />
     <entry file="file://$PROJECT_DIR$/js/maps.js" />
     <entry file="file://$PROJECT_DIR$/js/codigo_seguidor_lineas.ino" />
     <entry file="file://$PROJECT_DIR$/js/knockout-3.4.2.js" />
-    <entry file="file://$PROJECT_DIR$/../Catclicker_knock/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../Catclicker_knock/js/app.js" />
     <entry file="file://$PROJECT_DIR$/asdf" />
     <entry file="file://$PROJECT_DIR$/js/knock.js" />
-    <entry file="file://$PROJECT_DIR$/../ud864/07_Markers_Infowindows Quiz.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ud864/Project_Code_13_DevilInTheDetailsPlacesDetails.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="718" column="13" lean-forward="true" selection-start-line="718" selection-start-column="13" selection-end-line="718" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../ud864/07_Markers_Infowindows Quiz.html" />
+    <entry file="file://$PROJECT_DIR$/../ud864/Project_Code_13_DevilInTheDetailsPlacesDetails.html" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa22572.45999/script.js" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa22872.1132/script.js" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa23900.11282/script.js" />
-    <entry file="file://$USER_HOME$/Desktop/script.js">
+    <entry file="file://$USER_HOME$/Desktop/script.js" />
+    <entry file="file://$PROJECT_DIR$/css/navbar.css" />
+    <entry file="file://$PROJECT_DIR$/asdf.html" />
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="69" column="7" selection-start-line="54" selection-start-column="4" selection-end-line="69" selection-end-column="7" />
+        <state relative-caret-position="621">
+          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/navbar.css" />
-    <entry file="file://$PROJECT_DIR$/asdf.html" />
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -300,17 +332,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="126" column="34" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
+        <state relative-caret-position="207">
+          <caret line="90" column="76" lean-forward="true" selection-start-line="90" selection-start-column="76" selection-end-line="90" selection-end-column="76" />
         </state>
       </provider>
     </entry>
