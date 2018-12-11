@@ -17,7 +17,8 @@ function mapInit() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 19.702721, lng: -101.194019},
-        zoom: 17
+        zoom: 17,
+        mapTypeControl: false
     });
 
     largeInfowindow = new google.maps.InfoWindow();
@@ -38,7 +39,6 @@ function mapInit() {
         var title = locations[i].title;
         // Create a marker per location, and put into markers array.
         var marker = new google.maps.Marker({
-            map: map,
             position: position,
             title: title,
             animation: google.maps.Animation.DROP,
@@ -48,17 +48,18 @@ function mapInit() {
         // Push the marker to our array of markers.
         markers.push(marker);
         // Create an onclick event to open the large infowindow at each marker.
-        marker.addListener('click', function () {
+        marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
         });
         // Two event listeners - one for mouseover, one for mouseout,
         // to change the colors back and forth.
-        marker.addListener('mouseover', function () {
+        marker.addListener('mouseover', function() {
             this.setIcon(highlightedIcon);
         });
-        marker.addListener('mouseout', function () {
+        marker.addListener('mouseout', function() {
             this.setIcon(defaultIcon);
         });
+    }
         // Extend boundaries for every marker that we make
         bounds.extend(markers[i].position);
     }
@@ -122,13 +123,13 @@ function error() {
     alert("Google Maps has failed to load. Please try again.");
 }
 function ViewModel() {
-    self = this;
-    //Updates and stores the search
+   self= this;
+   //Updates and stores the search
     this.search = ko.observable("");
     //Stores markers in an observable array
-    this.loc = ko.observableArray();
+    this.loc=ko.observableArray();
     //copy the locations array into an observable array
-    for (var i = 0; i < markers.lenght; i++) {
+    for (var i = 0; i <markers.lenght; i++){
         self.loc.push(markers[i])
     }
     this.placestr = ko.observable();
@@ -138,7 +139,7 @@ function ViewModel() {
         url: wikiUrl,
         dataType: "jsonp",
         jsonp: "callback",
-        success: function (response) {
+        success: function( response ) {
             var articleList = response[1];
 
             for (var i = 0; i < articleList.length; i++) {
@@ -146,13 +147,30 @@ function ViewModel() {
                 var url = 'http://en.wikipedia.org/wiki/' + articleStr;
                 $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
             }
-            ;
 
             clearTimeout(wikiRequestTimeout);
         }
     });
-}
 
+    this.listViewClick = function(marker) {
+        google.maps.event.trigger(marker, 'click');
+    };
+
+    this.filteredLocations = ko.computed(function() {
+        var filter = self.search().toLowerCase();
+        if (!filter) {
+            self.loc().forEach(function(item){
+                item.setVisible(true);
+            });
+            return self.myLocations();
+        } else {
+            return ko.utils.arrayFilter(self.myLocations(), function(item) {
+                var match = item.name.toLowerCase().indexOf(filter) >= 0;
+                item.setVisible(match);
+                return match;
+            })
+        }}, self);
+}
 function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle('active');
 }
