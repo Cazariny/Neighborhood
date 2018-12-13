@@ -122,6 +122,29 @@ function error() {
     alert("Google Maps has failed to load. Please try again.");
 }
 function ViewModel() {
+
+        var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json&callback=wikiCallback';
+        $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            jsonp: "callback",
+            success: function( response ) {
+                var articleList = response[1];
+
+                for (var i = 0; i < articleList.length; i++) {
+                    articleStr = articleList[i];
+                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+                };
+
+                clearTimeout(wikiRequestTimeout);
+            }
+        });
+
+        this.listViewClick = function(marker) {
+            google.maps.event.trigger(marker, 'click');
+        }
+
     this.filteredLocations = ko.computed(function() {
         var filter = self.search().toLowerCase();
         if (!filter) {
