@@ -66,7 +66,6 @@ function mapInit() {
     map.fitBounds(bounds);
     //Activate knockout
     ko.applyBindings(new ViewModel());
-}
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
@@ -90,7 +89,7 @@ var Location = function(data) {
     this.name =  data.name;
     this.location = data.location;
     this.marker = data.marker;
-}
+};
 function error() {
     alert("Google Maps has failed to load. Please try again.");
 }
