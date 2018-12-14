@@ -39,10 +39,10 @@ function mapInit() {
         var title = locations[i].title;
         // Create a marker per location, and put into markers array.
         var marker = new google.maps.Marker({
+            map: map,
             position: position,
             title: title,
             animation: google.maps.Animation.DROP,
-            icon: defaultIcon,
             id: i
         });
         // Push the marker to our array of markers.
@@ -59,11 +59,12 @@ function mapInit() {
         marker.addListener('mouseout', function() {
             this.setIcon(defaultIcon);
         });
-    }
         // Extend boundaries for every marker that we make
         bounds.extend(markers[i].position);
     }
     map.fitBounds(bounds);
+}
+
     //Activate knockout
     ko.applyBindings(new ViewModel());
 
@@ -113,6 +114,7 @@ function populateInfoWindow(marker, infowindow) {
     }
 }
 
+
 var Location = function(data) {
     this.name =  data.name;
     this.location = data.location;
@@ -122,43 +124,32 @@ function error() {
     alert("Google Maps has failed to load. Please try again.");
 }
 function ViewModel() {
+    self = this;
+    // Stores and upates markers in knockout.js observable array
+    this.myLocations = ko.observableArray();
+    //Iterates over markers array and creates copies in the locations observable array
+    var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + markers.title + '&format=json&callback=wikiCallback';
+    $.ajax({
+        url: wikiUrl,
+        dataType: "jsonp",
+        jsonp: "callback",
+        success: function (response) {
+            var articleList = response[1];
 
-        var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json&callback=wikiCallback';
-        $.ajax({
-            url: wikiUrl,
-            dataType: "jsonp",
-            jsonp: "callback",
-            success: function( response ) {
-                var articleList = response[1];
-
-                for (var i = 0; i < articleList.length; i++) {
-                    articleStr = articleList[i];
-                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                    $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
-                };
-
-                clearTimeout(wikiRequestTimeout);
+            for (var i = 0; i < articleList.length; i++) {
+                articleStr = articleList[i];
+                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
             }
-        });
+            ;
 
-        this.listViewClick = function(marker) {
-            google.maps.event.trigger(marker, 'click');
+            clearTimeout(wikiRequestTimeout);
         }
+    });
 
-    this.filteredLocations = ko.computed(function() {
-        var filter = self.search().toLowerCase();
-        if (!filter) {
-            self.loc().forEach(function(item){
-                item.setVisible(true);
-            });
-            return self.myLocations();
-        } else {
-            return ko.utils.arrayFilter(self.myLocations(), function(item) {
-                var match = item.name.toLowerCase().indexOf(filter) >= 0;
-                item.setVisible(match);
-                return match;
-            })
-        }}, self);
+    this.listViewClick = function (marker) {
+        google.maps.event.trigger(marker, 'click');
+    };
 }
 function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle('active');
