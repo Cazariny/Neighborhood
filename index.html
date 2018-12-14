@@ -10,23 +10,6 @@
     <div id="map"></div>
     <div id="sidebar">
         <h2>History in Morelia</h2>
-        <div>
-            <form>
-                <input data-bind="textInput: search" id="search-box" placeholder="Search">
-            </form>
-        </div>
-        <div class="toggle-btn" onclick="toggleSidebar()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div>
-            <ul data-bind="foreach: filteredLocations">
-                <li data-bind="text: name, click: $parent.listViewClick"></li>
-            </ul>
-        </div>
-        <div class="links">
-        </div>
     </div>
     <script src="js/script.js"> </script>
         <script async defer
