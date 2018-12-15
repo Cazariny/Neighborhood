@@ -1,8 +1,8 @@
 var locations = [
-    {title: 'Antiguo Real Hospital de San Juan de Dios.', location: {lat: 19.7014449, lng:-101.1912001}},
+    {title: 'Antiguo Real Hospital de San Juan de Dios.', location: {lat: 19.702536, lng:-101.1912921}},
     {title: 'Universidad Michoacana de San Nicolás de Hidalgo.', location: {lat: 19.7034052, lng: -101.1947411}},
-    {title: 'Catedral de Morelia', location: {lat: 19.702423, lng: -101.1945125}},
-    {title: 'Museo Casa Natal de Morelos', location: {lat: 19.7006295, lng: -101.193861}},
+    {title: 'Catedral de Morelia', location: {lat: 19.702423, lng: -101.1923185}},
+    {title: 'Museo Casa Natal de Morelos', location: {lat: 19.7007562, lng: -101.1925578}},
     {title: 'Biblioteca Pública de la Universidad Michoacana', location: {lat: 19.7032583, lng: -101.1954469}},
     {title: 'Palacio Legislativo de Michoacán', location: {lat:19.7029558, lng: -101.1905739}}
 ];
@@ -20,18 +20,9 @@ function mapInit() {
         zoom: 17,
         mapTypeControl: false
     });
-
-    largeInfowindow = new google.maps.InfoWindow();
+    //all lists to adjust the boundaries of the map
     var bounds = new google.maps.LatLngBounds();
-
-
-    // Style the markers a bit. This will be our listing marker icon.
-    var defaultIcon = makeMarkerIcon('0091ff');
-
-    // Create a "highlighted location" marker color for when the user
-    // mouses over the marker.
-    var highlightedIcon = makeMarkerIcon('FFFF24');
-
+    largeInfowindow = new google.maps.InfoWindow();
     // The following group uses the location array to create an array of markers on initialize.
     for (var i = 0; i < locations.length; i++) {
         // Get the position from the location array.
@@ -51,22 +42,14 @@ function mapInit() {
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
         });
-        // Two event listeners - one for mouseover, one for mouseout,
-        // to change the colors back and forth.
-        marker.addListener('mouseover', function() {
-            this.setIcon(highlightedIcon);
-        });
-        marker.addListener('mouseout', function() {
-            this.setIcon(defaultIcon);
-        });
         // Extend boundaries for every marker that we make
         bounds.extend(markers[i].position);
     }
     map.fitBounds(bounds);
-}
 
     //Activate knockout
     ko.applyBindings(new ViewModel());
+}
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
@@ -75,17 +58,15 @@ function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker != marker) {
         // Clear the infowindow content to give the streetview time to load.
-        infowindow.setContent('');
+        infowindow.setContent('<div>' + marker.title + '</div>');
         infowindow.marker = marker;
+        infowindow.open(map, marker);
         // Make sure the marker property is cleared if the infowindow is closed.
         infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
         });
-        // Open the infowindow on the correct marker.
-        infowindow.open(map, marker);
-    }
-}
-
+            }
+        }
 
 var Location = function(data) {
     this.name =  data.name;
@@ -99,6 +80,10 @@ function ViewModel() {
     self = this;
     // Stores and upates markers in knockout.js observable array
     this.myLocations = ko.observableArray();
+    //Iterates over markers array and creates copies in the locations observable array
+    for ( var i = 0; i < markers.length; i++) {
+        self.myLocations.push(markers[i])
+    }
     //Iterates over markers array and creates copies in the locations observable array
     var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + markers.title + '&format=json&callback=wikiCallback';
     $.ajax({
@@ -119,10 +104,30 @@ function ViewModel() {
         }
     });
 
+    // Filter Marker
+    this.filteredLocations = ko.computed(function() {
+        var filter = self.search().toLowerCase();
+        if (!filter) {
+            self.myLocations().forEach(function(item){
+                item.setVisible(true);
+            });
+            return self.myLocations();
+        } else {
+            return ko.utils.arrayFilter(self.myLocations(), function(item) {
+                var match = item.name.toLowerCase().indexOf(filter) >= 0;
+                item.setVisible(match);
+                return match;
+            })
+        }}, self);
+
     this.listViewClick = function (marker) {
         google.maps.event.trigger(marker, 'click');
     };
+
 }
+
+
+
 function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle('active');
 }
