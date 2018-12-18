@@ -1,22 +1,16 @@
 var locations = [
     {title: 'Antiguo Real Hospital de San Juan de Dios.',
-        location: {lat: 19.702536, lng:-101.1912921},
-        wiki: ''},
+        location: {lat: 19.702536, lng:-101.1912921}},
     {title: 'Universidad Michoacana de San Nicolás de Hidalgo.',
-        location: {lat: 19.7034052, lng: -101.1947411},
-        wiki: ''},
+        location: {lat: 19.7034052, lng: -101.1947411}},
     {title: 'Catedral de Morelia',
-        location: {lat: 19.702423, lng: -101.1923185},
-        wiki: ''},
+        location: {lat: 19.702423, lng: -101.1923185}},
     {title: 'Museo Casa Natal de Morelos',
-        location: {lat: 19.7007562, lng: -101.1925578},
-        wiki: ''},
+        location: {lat: 19.7007562, lng: -101.1925578}},
     {title: 'Biblioteca Pública de la Universidad Michoacana',
-        location: {lat: 19.7032583, lng: -101.1954469},
-        wiki: ''},
+        location: {lat: 19.7032583, lng: -101.1954469}},
     {title: 'Palacio Legislativo de Michoacán',
-        location: {lat:19.7029558, lng: -101.1905739},
-        wiki: ''}
+        location: {lat:19.7029558, lng: -101.1905739}}
 ];
 var map;
 
@@ -41,16 +35,13 @@ function ViewModel() {
         // Get the position from the location array.
         var position = locations[i].location;
         var title = locations[i].title;
-        var articles = locations[i].wiki;
+        var wikiart=[];
+
         //Iterates over markers array and creates copies in the locations observable array
         var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json&callback=wikiCallback';
-        var wikiRequestTimeout = setTimeout(function(){
-            alert("failed to get wikipedia resources");
-        }, 1000);
         $.ajax({
             url: wikiUrl,
             dataType: "jsonp",
-            jsonp: "callback",
             success: function (response) {
                 var articleList = response[1];
 
@@ -58,9 +49,7 @@ function ViewModel() {
                     articleStr = articleList[i];
                     var url = 'http://es.wikipedia.org/wiki/' + articleStr;
                 }
-                if (url.includes(locations.title)){
-                    wiki.push(url);
-                }
+                wikiart.push(url)
             }
         });
 
@@ -70,7 +59,6 @@ function ViewModel() {
             map: map,
             position: position,
             title: title,
-            url : articles,
             animation: google.maps.Animation.DROP,
             id: i
         });
