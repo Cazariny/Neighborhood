@@ -35,24 +35,6 @@ function ViewModel() {
         // Get the position from the location array.
         var position = locations[i].location;
         var title = locations[i].title;
-        var wikiart=[];
-
-        //Iterates over markers array and creates copies in the locations observable array
-        var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json&callback=wikiCallback';
-        $.ajax({
-            url: wikiUrl,
-            dataType: "jsonp",
-            success: function (response) {
-                var articleList = response[1];
-
-                for (var i = 0; i < articleList.length; i++) {
-                    articleStr = articleList[i];
-                    var url = 'http://es.wikipedia.org/wiki/' + articleStr;
-                }
-                wikiart.push(url)
-            }
-        });
-
 
         // Create a marker per location, and put into markers array.
         var marker = new google.maps.Marker({
@@ -70,34 +52,41 @@ function ViewModel() {
         });
         // Extend boundaries for every marker that we make
         bounds.extend(markers[i].position);
-    }
-    map.fitBounds(bounds);
+        // This function populates the infowindow when the marker is clicked. We'll only allow
+        // one infowindow which will open at the marker that is clicked, and populate based
+        // on that markers position.
+        function populateInfoWindow(marker, infowindow) {
+            var wikiUrl = 'http://es.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
+            $.ajax({
+                url: wikiUrl,
+                dataType: "jsonp",
+                success: function (response) {
+                    var articleList = response[1];
 
-function error() {
-    alert("Google Maps has failed to load. Please try again.");
-}
-    // Stores and upates markers in knockout.js observable array
-    this.myLocations = ko.observableArray();
-    //Iterates over markers array and creates copies in the locations observable array
-    for ( var i = 0; i < markers.length; i++) {
-        self.myLocations.push(markers[i])
-    }
-// This function populates the infowindow when the marker is clicked. We'll only allow
-// one infowindow which will open at the marker that is clicked, and populate based
-// on that markers position.
-    function populateInfoWindow(marker, infowindow) {
-        // Check to make sure the infowindow is not already opened on this marker.
-        if (infowindow.marker != marker) {
-            // Clear the infowindow content to give the streetview time to load.
-            infowindow.setContent('<a href="'+wikiart+'">'+ marker.title + '</a>');
-            infowindow.marker = marker;
-            infowindow.open(map, marker);
-            // Make sure the marker property is cleared if the infowindow is closed.
-            infowindow.addListener('closeclick', function() {
-                infowindow.marker = null;
+                    for (var i = 0; i < articleList.length; i++) {
+                        articleStr = articleList[i];
+                        console.log(articleStr);
+
+                        // Check to make sure the infowindow is not already opened on this marker.
+                        if (infowindow.marker != marker) {
+                            infowindow.setContent('<a href="'+articleStr+'" target="_blank">'+ marker.title + '</a>');
+                            infowindow.open(map, marker);
+                            // Make sure the marker property is cleared if the infowindow is closed.
+                            infowindow.addListener('closeclick', function() {
+                                infowindow.marker = null;
+                            });
+                        }
+                    }
+                }
             });
         }
     }
+    map.fitBounds(bounds);
+
+    function error() {
+        alert("Google Maps can not be loaded. Please try again.");
+    }
+
     // Filter Marker
     this.filteredLocations = ko.computed(function() {
         var filter = self.search().toLowerCase();
