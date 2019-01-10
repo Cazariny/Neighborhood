@@ -65,23 +65,24 @@ function ViewModel() {
 
                     for (var i = 0; i < articleList.length; i++) {
                         articleStr = articleList[i];
-                        console.log(articleStr);
+                        // console.log(articleStr);
+                        url= 'http://es.wikipedia.org/wiki/' + articleStr;
 
                         // Check to make sure the infowindow is not already opened on this marker.
                         if (infowindow.marker != marker) {
-                            infowindow.setContent('<a href="'+articleStr+'" target="_blank">'+ marker.title + '</a>');
-                            infowindow.open(map, marker);
-                            // Make sure the marker property is cleared if the infowindow is closed.
-                            infowindow.addListener('closeclick', function() {
-                                infowindow.marker = null;
-                            });
-                        }
-                    }
-                }
-            });
-        }
+        infowindow.setContent('<a href="'+url+'" target="_blank">'+ marker.title + '</a>');
+        infowindow.open(map, marker);
+        // Make sure the marker property is cleared if the infowindow is closed.
+        infowindow.addListener('closeclick', function() {
+            infowindow.marker = null;
+        });
     }
-    map.fitBounds(bounds);
+}
+}
+});
+}
+}
+map.fitBounds(bounds);
 
     function error() {
         alert("Google Maps can not be loaded. Please try again.");
