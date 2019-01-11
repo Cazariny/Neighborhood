@@ -19,14 +19,17 @@ var markers = [];
 
 var largeInfowindow;
 
-function ViewModel() {
-    self = this;
+function initmap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 19.702721, lng: -101.194019},
         zoom: 17,
         mapTypeControl: false
     });
+    ko.applyBindings(new ViewModel());
+}
+function ViewModel() {
+    self = this;
     //all lists to adjust the boundaries of the map
     var bounds = new google.maps.LatLngBounds();
     largeInfowindow = new google.maps.InfoWindow();
@@ -76,17 +79,20 @@ function ViewModel() {
         infowindow.addListener('closeclick', function() {
             infowindow.marker = null;
         });
+                        }
+                    }
+                }
+            });
+        }
     }
-}
-}
-});
-}
-}
 map.fitBounds(bounds);
 
     function error() {
         alert("Google Maps can not be loaded. Please try again.");
     }
+
+    this.search() = ko.observable("");
+
 
     // Filter Marker
     this.filteredLocations = ko.computed(function() {
@@ -114,9 +120,4 @@ map.fitBounds(bounds);
 
 function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle('active');
-}
-
-function mapInit() {
-    //Activate knockout
-    ko.applyBindings(new ViewModel());
 }
