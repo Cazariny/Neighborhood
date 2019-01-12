@@ -50,7 +50,7 @@ function ViewModel() {
         // Push the marker to our array of markers.
         markers.push(marker);
         // Create an onclick event to open the large infowindow at each marker.
-        marker.addListener('click', function() {
+        marker.addListener('click', function () {
             populateInfoWindow(this, largeInfowindow);
         });
         // Extend boundaries for every marker that we make
@@ -69,53 +69,54 @@ function ViewModel() {
                     for (var i = 0; i < articleList.length; i++) {
                         articleStr = articleList[i];
                         // console.log(articleStr);
-                        url= 'http://es.wikipedia.org/wiki/' + articleStr;
+                        url = 'http://es.wikipedia.org/wiki/' + articleStr;
 
                         // Check to make sure the infowindow is not already opened on this marker.
                         if (infowindow.marker != marker) {
-        infowindow.setContent('<a href="'+url+'" target="_blank">'+ marker.title + '</a>');
-        infowindow.open(map, marker);
-        // Make sure the marker property is cleared if the infowindow is closed.
-        infowindow.addListener('closeclick', function() {
-            infowindow.marker = null;
-        });
+                            infowindow.setContent('<a href="' + url + '" target="_blank">' + marker.title + '</a>');
+                            infowindow.open(map, marker);
+                            // Make sure the marker property is cleared if the infowindow is closed.
+                            infowindow.addListener('closeclick', function () {
+                                infowindow.marker = null;
+                            });
                         }
                     }
                 }
             });
         }
     }
-map.fitBounds(bounds);
+    map.fitBounds(bounds);
 
     function error() {
         alert("Google Maps can not be loaded. Please try again.");
     }
 
-    this.search() = ko.observable("");
+    this.search = ko.observable("");
+    this.loc = ko.observableArray();
 
-
-    // Filter Marker
-    this.filteredLocations = ko.computed(function() {
-        var filter = self.search().toLowerCase();
-        if (!filter) {
-            self.myLocations().forEach(function(item){
-                item.setVisible(true);
-            });
-            return self.myLocations();
-        } else {
-            return ko.utils.arrayFilter(self.myLocations(), function(item) {
-                var match = item.name.toLowerCase().indexOf(filter) >= 0;
-                item.setVisible(match);
-                return match;
-            })
-        }}, self);
-
+    for (var i = 0; i < markers.length; i++) {
+        self.loc.push(markers[i])
+    }
     this.listViewClick = function (marker) {
         google.maps.event.trigger(marker, 'click');
     };
-
+    // Filter Marker
+    this.filters = ko.computed(function () {
+        var filter = self.search();
+        if (!filter) {
+            self.loc().forEach(function (markers) {
+                markers.setVisible(true);
+            });
+            return self.loc();
+        } else {
+            return ko.utils.arrayFilter(self.loc(), function (markers) {
+                var match = markers.name.indexOf(filter) >= 0;
+                markers.setVisible(match);
+                return match;
+            })
+        }
+    }, self);
 }
-
 
 
 function toggleSidebar() {
