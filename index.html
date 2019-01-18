@@ -4,9 +4,8 @@
         <meta charset="UTF-8">
         <title> Historical Morelia</title>
         <link rel="stylesheet" href="css/style.css">
-
     </head>
-    <div>
+    <body>
     <div id="map"></div>
     <div id="sidebar">
         <h2>History in Morelia</h2>
@@ -15,19 +14,19 @@
             <input data-bind="textInput: search" id="search-box" placeholder="Search">
         </form>
         </div>
-        <div class="toggle-btn" onclick="toggleSidebar()">
-        <span></span> <span></span> <span></span>
+        <div class="menu-btn" onclick="toggleSide()">
+            <span></span> <span></span> <span></span>
         </div>
         <div>
             <ul data-bind="foreach: filters">
-                <li data-bind="text: title, click: $parent.listViewClick"></li>
+                <li data-bind="text: title, click: $parent.info"></li>
             </ul>
         </div>
     </div>
-    </div>
     <script src="js/script.js"> </script>
     <script async defer
-                src= "https://maps.googleapis.com/maps/api/js?&key=AIzaSyDU6vmO1vxcxYRjRSWY-UVnhS-4eGU4tpk&v=3&callback=initmap" onerror="error()">
+                src= "https://maps.googleapis.com/maps/api/js?&key=AIzaSyDU6vmO1vxcxYRjRSWY-UVnhS-4eGU4tpk&v=3&callback=initmap"
+            onerror= "error()">
     </script>
     <script src= "js/lib/jquery-3.3.1.min.js"></script>
     <script src="js/lib/knockout-3.4.2.js"></script>
