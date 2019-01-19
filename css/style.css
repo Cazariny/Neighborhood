@@ -17,11 +17,8 @@ body {
     position: absolute;
 }
 h2 {
-    color: rgba(230, 230, 230, 0.9);
-    margin: 0px;
+    color: lightblue;
     padding: 15px 40px;
-    font-family: sans-serif;
-    background: #151719;
 }
 
 body div form {
@@ -31,55 +28,44 @@ body div form {
     position: fixed;
     width: 250px;
     height: 100%;
-    position: fixed;
     background: #151719;
     left: -250px;
     transition: all 500ms linear;
 }
+
 #sidebar.active {
     left: 0px;
 }
+
 #sidebar ul li {
-    color: rgba(230, 230, 230, 0.9);
+    color: white;
     list-style: none;
     padding: 15px 10px;
-    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+    border-bottom: 1px solid #f4f8fa;
 }
 
 #sidebar ul li:hover {
     color: #fff;
-    background: #2196f3;
+    background: #235795;
 }
 
-#sidebar .toggle-btn {
+#sidebar .menu-btn{
     position: fixed;
-    left: 270px;
-    top: 15px;
-}
-#sidebar .toggle-btn span {
-    display: block;
-    width: 30px;
-    height: 5px;
-    background: #151719;
-    margin: 3px 0px;
+    left: 280px;
+    top: 20px;
+
 }
 
-/*search-btn {*/
-    /*background: #0099ff;*/
-    /*color: white;*/
-    /*font: 'trebuchet ms', trebuchet;*/
-    /*padding: 10px 20px;*/
-    /*border-radius: 0 5px 5px 0;*/
-    /*-moz-border-radius: 0 5px 5px 0;*/
-    /*-webkit-border-radius: 0 5px 5px 0;*/
-    /*-o-border-radius: 0 5px 5px 0;*/
-    /*border: 0 none;*/
-    /*font-weight: bold;*/
-/*}*/
+#sidebar .menu-btn span{
+    display: block;
+    width: 20px;
+    height: 5px;
+    margin: 2px;
+    background: black;
+}
 
 #search-box {
     background: #eee;
     padding: 10px;
-    border: 0 none;
-    width: 210px;
+    width: 220px;
 }
