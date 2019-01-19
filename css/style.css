@@ -3,12 +3,15 @@
     padding: 0px;
     font-family: sans-serif;
 }
+
 html {
     height: 100%;
 }
+
 body {
     min-height: 100%;
 }
+
 #map {
     bottom: 0px;
     height: 100%;
@@ -16,6 +19,7 @@ body {
     right: 0px;
     position: absolute;
 }
+
 h2 {
     color: lightblue;
     padding: 15px 40px;
@@ -24,6 +28,7 @@ h2 {
 body div form {
     border-bottom: 50px;
 }
+
 #sidebar {
     position: fixed;
     width: 250px;
@@ -46,26 +51,38 @@ body div form {
 
 #sidebar ul li:hover {
     color: #fff;
-    background: #235795;
+    background: #2196f3;
 }
 
-#sidebar .menu-btn{
+#sidebar .toggle-btn {
     position: fixed;
-    left: 280px;
-    top: 20px;
-
+    left: 270px;
+    top: 15px;
 }
-
-#sidebar .menu-btn span{
+#sidebar .toggle-btn span {
     display: block;
-    width: 20px;
+    width: 30px;
     height: 5px;
-    margin: 2px;
-    background: black;
+    background: #151719;
+    margin: 3px 0px;
 }
+
+/*search-btn {*/
+    /*background: #0099ff;*/
+    /*color: white;*/
+    /*font: 'trebuchet ms', trebuchet;*/
+    /*padding: 10px 20px;*/
+    /*border-radius: 0 5px 5px 0;*/
+    /*-moz-border-radius: 0 5px 5px 0;*/
+    /*-webkit-border-radius: 0 5px 5px 0;*/
+    /*-o-border-radius: 0 5px 5px 0;*/
+    /*border: 0 none;*/
+    /*font-weight: bold;*/
+/*}*/
 
 #search-box {
     background: #eee;
     padding: 10px;
-    width: 220px;
+    border: 0 none;
+    width: 210px;
 }

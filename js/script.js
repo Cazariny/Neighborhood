@@ -23,7 +23,7 @@ function initmap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 19.702721, lng: -101.194019},
-        zoom: 14,
+        zoom: 17,
         mapTypeControl: false
     });
     ko.applyBindings(new ViewModel());
@@ -64,63 +64,58 @@ function ViewModel() {
             $.ajax({
                 url: wikiUrl,
                 dataType: "jsonp",
-                success: function () {
-                    url = 'http://es.wikipedia.org/wiki/' + marker.title;
+                success: function (response) {
+                    var name = response[1];
+                    var info = response[2];
+                    var link = response[3];
 
                     // Check to make sure the infowindow is not already opened on this marker.
                     if (infowindow.marker != marker) {
-                        infowindow.setContent('<a href="' + url + '" target="_blank">' + marker.title + '</a>');
+                        infowindow.setContent('<a href="' + link + '" target="_blank">' + name + '</a>' + ' <p>' + info + '</p>');
                         infowindow.open(map, marker);
                         // Make sure the marker property is cleared if the infowindow is closed.
                         infowindow.addListener('closeclick', function () {
                             infowindow.marker = null;
                         });
                     }
-                },
-                error: function () {
-                    alert("Sorry, Wikipedia failed to load ")
                 }
             });
         }
     }
-
-
     map.fitBounds(bounds);
 
-    this.info = function (marker) {
-        google.maps.event.trigger(marker, 'click');
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-    };
-
+    function error() {
+        alert("Google Maps can not be loaded. Please try again.");
+    }
 
     this.search = ko.observable("");
+    this.loc = ko.observableArray();
+
+    for (var i = 0; i < markers.length; i++) {
+        self.loc.push(markers[i])
+    }
+    this.listViewClick = function (marker) {
+        google.maps.event.trigger(marker, 'click');
+    };
+    // Filter Marker
     this.filters = ko.computed(function () {
-        filter = self.search();
-        loc = ko.observableArray();
-        for (var b = 0; b < markers.length; b++) {
-            loc.push(markers[b]);
-        }
+        var filter = self.search();
         if (!filter) {
-            loc().forEach(function (marker) {
-                marker.setVisible(true)
+            self.loc().forEach(function (markers) {
+                markers.setVisible(true);
             });
-            return loc()
-        } else{}   return ko.utils.arrayFilter(loc(),function (marker) {
-            match = marker.title;
-            if ( equal= match.indexOf(filter) > -1) {
-                marker.setVisible(equal);
-                return equal;
-            } else {
-                marker.setVisible(false)
-            }
-        })
-    }, self)
+            return self.loc();
+        } else {
+            return ko.utils.arrayFilter(self.loc(), function (markers) {
+                var match = markers.name.indexOf(filter) >= 0;
+                markers.setVisible(match);
+                return match;
+            })
+        }
+    }, self);
 }
 
-function toggleSide() {
-    document.getElementById("sidebar").classList.toggle('active')
-}
 
-function error() {
-    alert("Google Maps can not be loaded. Please try again.");
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle('active');
 }
