@@ -78,44 +78,55 @@ function ViewModel() {
                             infowindow.marker = null;
                         });
                     }
+                },
+                error: function () {
+                    alert("Sorry, Wikipedia failed to load ")
                 }
             });
         }
     }
-    map.fitBounds(bounds);
-
-    function error() {
-        alert("Google Maps can not be loaded. Please try again.");
-    }
-
     this.search = ko.observable("");
     this.loc = ko.observableArray();
 
     for (var i = 0; i < markers.length; i++) {
         self.loc.push(markers[i])
     }
-    this.listViewClick = function (marker) {
+    this.info = function (marker) {
         google.maps.event.trigger(marker, 'click');
+        marker.setAnimation(google.maps.Animation.BOUNCE);
     };
+
+
+    this.search = ko.observable("");
     // Filter Marker
     this.filters = ko.computed(function () {
+        filter = self.search();
+        loc = ko.observableArray();
+        for (var b = 0; b < markers.length; b++) {
+            loc.push(markers[b]);
+        }
         var filter = self.search();
         if (!filter) {
-            self.loc().forEach(function (markers) {
-                markers.setVisible(true);
-            });
-            return self.loc();
-        } else {
-            return ko.utils.arrayFilter(self.loc(), function (markers) {
-                var match = markers.name.indexOf(filter) >= 0;
-                markers.setVisible(match);
-                return match;
+            loc().forEach(function (marker) {
+                marker.setVisible(true)
+                });
+                return loc()
+            } else{}   return ko.utils.arrayFilter(loc(),function (marker) {
+                match = marker.title;
+                if ( equal= match.indexOf(filter) > -1) {
+                    marker.setVisible(equal);
+                    return equal;
+                } else {
+                    marker.setVisible(false)
+                }
             })
-        }
-    }, self);
+        }, self)
+    }
+
+function error() {
+    alert("Google Maps can not be loaded. Please try again.");
 }
 
-
-function toggleSidebar() {
+function toggleSide() {
     document.getElementById("sidebar").classList.toggle('active');
 }

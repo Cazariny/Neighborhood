@@ -39,7 +39,7 @@ body div form {
 }
 
 #sidebar.active {
-    left: 0px;
+    left: 0;
 }
 
 #sidebar ul li {
@@ -51,38 +51,26 @@ body div form {
 
 #sidebar ul li:hover {
     color: #fff;
-    background: #2196f3;
+    background: #235795;
 }
 
-#sidebar .toggle-btn {
+#sidebar .menu-btn {
     position: fixed;
-    left: 270px;
-    top: 15px;
-}
-#sidebar .toggle-btn span {
-    display: block;
-    width: 30px;
-    height: 5px;
-    background: #151719;
-    margin: 3px 0px;
+    left: 28px;
+    top: 20px;
 }
 
-/*search-btn {*/
-    /*background: #0099ff;*/
-    /*color: white;*/
-    /*font: 'trebuchet ms', trebuchet;*/
-    /*padding: 10px 20px;*/
-    /*border-radius: 0 5px 5px 0;*/
-    /*-moz-border-radius: 0 5px 5px 0;*/
-    /*-webkit-border-radius: 0 5px 5px 0;*/
-    /*-o-border-radius: 0 5px 5px 0;*/
-    /*border: 0 none;*/
-    /*font-weight: bold;*/
-/*}*/
+#sidebar .menu-btn span {
+    display: block;
+    width: 20px;
+    height: 5px;
+    background: black;
+    margin: 2px;
+}
+
 
 #search-box {
     background: #eee;
     padding: 10px;
-    border: 0 none;
-    width: 210px;
+    width: 220px;
 }
