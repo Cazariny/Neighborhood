@@ -52,6 +52,7 @@ function ViewModel() {
         // Create an onclick event to open the large infowindow at each marker.
         marker.addListener('click', function () {
             populateInfoWindow(this, largeInfowindow);
+            setTimeout(bounce(marker), 200)
         });
 
         // Extend boundaries for every marker that we make
@@ -71,10 +72,10 @@ function ViewModel() {
 
                     // Check to make sure the infowindow is not already opened on this marker.
                     if (infowindow.marker != marker) {
-                        infowindow.setContent('<a href="' + link + '" target="_blank">' + name + '</a>' + ' <p>' + info + '</p>');
+                        infowindow.setContent('<a href="' + 'link' + '" target="_blank">' + name + '</a>' + ' <p>' + info + '</p>');
                         infowindow.open(map, marker);
                         // Make sure the marker property is cleared if the infowindow is closed.
-                        infowindow.addListener('closeclick', function () {
+                        infowindow.addListener('click', function () {
                             infowindow.marker = null;
                         });
                     }
@@ -85,6 +86,8 @@ function ViewModel() {
             });
         }
     }
+
+
     this.search = ko.observable("");
     this.loc = ko.observableArray();
 
@@ -94,6 +97,10 @@ function ViewModel() {
     this.info = function (marker) {
         google.maps.event.trigger(marker, 'click');
         marker.setAnimation(google.maps.Animation.BOUNCE);
+        bounce = function(){
+            marker.setAnimation(google.maps.Animation.Null)
+        };
+        setTimeout(bounce(), 200)
     };
 
 
