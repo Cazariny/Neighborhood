@@ -52,7 +52,6 @@ function ViewModel() {
         // Create an onclick event to open the large infowindow at each marker.
         marker.addListener('click', function () {
             populateInfoWindow(this, largeInfowindow);
-            setTimeout(bounce(), 2000)
         });
 
         // Extend boundaries for every marker that we make
@@ -86,9 +85,9 @@ function ViewModel() {
             });
         }
     }
-    bounce = function(){
-        marker.setAnimation(google.maps.Animation.Null)
-    };
+
+
+
 
     this.search = ko.observable("");
     this.loc = ko.observableArray();
@@ -99,8 +98,11 @@ function ViewModel() {
     this.info = function (marker) {
         google.maps.event.trigger(marker, 'click');
         marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(bounce(), 3000)
+        setTimeout(function() {
+            marker.setAnimation(google.maps.Animation.Null);
+        }, 2000);
     };
+
 
 
     this.search = ko.observable("");
@@ -124,6 +126,7 @@ function ViewModel() {
                     return equal;
                 } else {
                     marker.setVisible(false)
+                    infowindow.marker = null
                 }
             })
         }, self)
