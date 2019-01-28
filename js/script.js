@@ -125,8 +125,7 @@ function ViewModel() {
                     marker.setVisible(equal);
                     return equal;
                 } else {
-                    marker.setVisible(false)
-                    infowindow.marker = null
+                    marker.setVisible(false);
                 }
             })
         }, self)
